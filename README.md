@@ -1,5 +1,6 @@
 ## Flashcard Project!
 This project began in an effort for me to have an easy-to-use flashcard website, and also to have fun with TypeScript & React and any potential technology I may want to learn in the future!
+I also wanted to challenge myself by having no backend in this project, so that I must really think critically to create something unique and special with the limited set of tools provided.
 
 ## Intention
 - Lightweight, easy to use web-based flashcard application.
@@ -12,3 +13,4 @@ This project began in an effort for me to have an easy-to-use flashcard website,
 - Local storage (I am a big fan 😄).
 - Import & export flashcards.
 - Dark/Light mode (a fun challenge to take on).
+- Support for Mobile devices
