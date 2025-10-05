@@ -1,5 +1,3 @@
-// Decks.tsx
-
 import DeckBox from '../components/deckbox';
 
 type Card = { front: string; back: string };
@@ -24,9 +22,12 @@ export default function Decks() {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
         <button
           type="button"
-          className="flex aspect-square flex-col items-center justify-center rounded-2xl border border-dashed border-gray-300 transition hover:border-blue-300 hover:bg-blue-50/40 dark:border-zinc-700 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/40"
+          className={`flex aspect-square flex-col items-center justify-center rounded-2xl
+            border-3 border-dashed border-gray-300 transition hover:border-blue-300
+            hover:bg-blue-300
+          `}
         >
-          <span className="mb-1 text-2xl">＋</span>
+          <span className="mb-1 text-2xl">+</span>
           <span className="text-sm">Add Deck</span>
         </button>
 
