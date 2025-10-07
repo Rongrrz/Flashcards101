@@ -1,10 +1,14 @@
-type DeckBoxProps = {
+type PreviewDeckButtonProps = {
   name: string;
   cardCount: number;
   onClick: () => void;
 };
 
-export default function DeckBox({ name, cardCount, onClick }: DeckBoxProps) {
+export default function PreviewDeckButton({
+  name,
+  cardCount,
+  onClick,
+}: PreviewDeckButtonProps) {
   return (
     <button
       type="button"

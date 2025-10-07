@@ -1,11 +1,10 @@
-import DeckBox from '../components/deck-box';
 import { useState } from 'react';
-import { DeckModal } from '../components/deck-modal';
+import PreviewDeckButton from '../components/deck/preview-btn';
+import { PreviewDeckModal } from '../components/deck/preview-modal';
+import EditDeckModal from '../components/deck/edit-modal';
+import type { Deck } from '../types/types';
 
-type Card = { front: string; back: string };
-type Deck = { name: string; cards: Card[] };
-
-const MOCK_DECKS: Deck[] = [
+const MOCK_DECKS: Array<Omit<Deck, 'id'>> = [
   {
     name: 'Classics 101',
     cards: [
@@ -20,41 +19,92 @@ const MOCK_DECKS: Deck[] = [
   { name: 'World Capitals', cards: [] },
 ];
 
+const makeId = () => String(Date.now() + Math.random());
+
 export default function Decks() {
+  const [decks, setDecks] = useState<Deck[]>(
+    // Fill in IDs for MOCK_DECK objects
+    () =>
+      MOCK_DECKS.map((d) => ({
+        id: makeId(),
+        name: d.name,
+        cards: d.cards,
+      })) as Deck[]
+  );
+
   const [selected, setSelected] = useState<Deck | null>(null);
+
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [editing, setEditing] = useState<Deck>();
+
+  const openPreview = (d: Deck) => setSelected(d);
+
+  function handleEditDeck(d: Deck) {
+    setSelected(null);
+    setEditing(d);
+    setEditorOpen(true);
+  };
+
+  function handleNewDeck() {
+    setEditing(undefined);
+    setEditorOpen(true);
+  };
+
+  function handleSaveFromEditor(deck: Deck) {
+    setDecks((prev) => {
+      const i = prev.findIndex((x) => x.id === deck.id);
+      if (i === -1) return [deck, ...prev];
+      const next = prev.slice();
+      next[i] = deck;
+      return next;
+    });
+    setEditorOpen(false);
+  };
+
+  function handleDeleteDeck(id: string) {
+    setDecks((prev) => prev.filter((d) => d.id !== id));
+    setEditorOpen(false);
+    setSelected(null);
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
       <header className="mb-8 flex items-end justify-between">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight">My Decks</h1>
-        </div>
+        <h1 className="text-4xl font-bold tracking-tight">My Decks</h1>
+        <button
+          type="button"
+          onClick={handleNewDeck}
+          className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700"
+        >
+          + New deck
+        </button>
       </header>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-        <button
-          type="button"
-          className={`flex aspect-square flex-col items-center justify-center rounded-2xl
-            border-3 border-dashed border-gray-300 transition hover:border-0
-            hover:bg-blue-300 hover:shadow-md
-          `}
-          onClick={() => alert('TODO: open Create Deck dialog')}
-        >
-          <span className="mb-1 text-2xl">+</span>
-          <span className="text-sm">Add Deck</span>
-        </button>
-
-        {MOCK_DECKS.map((deck) => (
-          <DeckBox
-            key={deck.name}
+        {decks.map((deck) => (
+          <PreviewDeckButton
+            key={deck.id}
             name={deck.name}
             cardCount={deck.cards.length}
-            onClick={() => setSelected(deck)}
+            onClick={() => openPreview(deck)}
           />
         ))}
       </div>
 
-      <DeckModal deck={selected} onClose={() => setSelected(null)} />
+      <PreviewDeckModal
+        deck={selected}
+        onClose={() => setSelected(null)}
+        onEdit={handleEditDeck}
+      />
+
+      <EditDeckModal
+        key={editorOpen ? (editing?.id ?? 'open') : 'closed'}
+        open={editorOpen}
+        initialDeck={editing}
+        onSave={handleSaveFromEditor}
+        onClose={() => setEditorOpen(false)}
+        onDelete={handleDeleteDeck}
+      />
     </div>
   );
 }

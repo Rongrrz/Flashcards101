@@ -1,9 +1,10 @@
-export type Flashcard = {
+export type Card = {
   front: string;
   back: string;
 };
 
 export type Deck = {
+  id: string;
   name: string;
-  cards: Array<Flashcard>;
+  cards: Array<Card>;
 };

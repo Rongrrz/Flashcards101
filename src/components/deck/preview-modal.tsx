@@ -1,11 +1,12 @@
-import type { Deck } from '../types/types';
+import type { Deck } from '../../types/types';
 
-type DeckModalProps = {
+type PreviewDeckModalProps = {
   deck: Deck | null;
   onClose: () => void;
+  onEdit: (deck: Deck) => void;
 };
 
-export function DeckModal({ deck, onClose }: DeckModalProps) {
+export function PreviewDeckModal({ deck, onClose, onEdit }: PreviewDeckModalProps) {
   if (!deck) return null;
 
   return (
@@ -17,7 +18,9 @@ export function DeckModal({ deck, onClose }: DeckModalProps) {
       <div className="relative mx-auto mt-24 w-[min(800px,92vw)] rounded-lg bg-white p-6">
         <div className="flex items-baseline justify-between">
           <div>
-            <h2 className="text-lg font-semibold leading-tight">Previewing Deck: {deck.name}</h2>
+            <h2 className="text-lg font-semibold leading-tight">
+              Previewing Deck: {deck.name}
+            </h2>
             <p className="mt-1 text-sm text-gray-500">
               {deck.cards.length} {deck.cards.length === 1 ? 'card' : 'cards'}
             </p>
@@ -29,7 +32,10 @@ export function DeckModal({ deck, onClose }: DeckModalProps) {
           <button className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
             Practice
           </button>
-          <button className="rounded-md px-4 py-2 text-sm font-medium ring-1 ring-inset ring-gray-200 hover:bg-gray-50">
+          <button
+            onClick={() => deck && onEdit(deck)}
+            className="rounded-md px-4 py-2 text-sm font-medium ring-1 ring-inset ring-gray-200 hover:bg-gray-50"
+          >
             Edit deck
           </button>
         </div>
