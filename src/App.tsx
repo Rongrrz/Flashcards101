@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Navbar } from "./components/navbar";
 import { Home } from "./pages/home";
 import Decks from "./pages/decks";
+import { Practice } from "./pages/practice";
 
 
 export function App() {
@@ -16,6 +17,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/decks" element={<Decks />} />
+            <Route path="/practice" element={<Practice />} />
           </Routes>
         </main>
 

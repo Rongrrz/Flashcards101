@@ -8,3 +8,5 @@ export type Deck = {
   name: string;
   cards: Array<Card>;
 };
+
+export type DecksState = Record<string, Deck>;

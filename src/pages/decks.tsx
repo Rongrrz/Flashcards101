@@ -3,34 +3,11 @@ import PreviewDeckButton from '../components/deck/preview-btn';
 import { PreviewDeckModal } from '../components/deck/preview-modal';
 import EditDeckModal from '../components/deck/edit-modal';
 import type { Deck } from '../types/types';
-
-const MOCK_DECKS: Array<Omit<Deck, 'id'>> = [
-  {
-    name: 'Classics 101',
-    cards: [
-      { front: 'logy', back: 'the study of' },
-      { front: 'idi', back: 'own, personal' },
-      { front: 'ora', back: 'see' },
-      { front: 'phen, phan, pha', back: 'show' },
-    ],
-  },
-  { name: 'Derivatives', cards: [{ front: 'd/dx x²', back: '2x' }] },
-  { name: 'Biology Basics', cards: [] },
-  { name: 'World Capitals', cards: [] },
-];
-
-const makeId = () => String(Date.now() + Math.random());
+import { useStore } from '@nanostores/react';
+import { deckListOrdered, updateDecks } from '../stores/decks';
 
 export default function Decks() {
-  const [decks, setDecks] = useState<Deck[]>(
-    // Fill in IDs for MOCK_DECK objects
-    () =>
-      MOCK_DECKS.map((d) => ({
-        id: makeId(),
-        name: d.name,
-        cards: d.cards,
-      })) as Deck[]
-  );
+  const decks = useStore(deckListOrdered);
 
   const [selected, setSelected] = useState<Deck | null>(null);
 
@@ -43,29 +20,27 @@ export default function Decks() {
     setSelected(null);
     setEditing(d);
     setEditorOpen(true);
-  };
+  }
 
   function handleNewDeck() {
     setEditing(undefined);
     setEditorOpen(true);
-  };
+  }
 
   function handleSaveFromEditor(deck: Deck) {
-    setDecks((prev) => {
-      const i = prev.findIndex((x) => x.id === deck.id);
-      if (i === -1) return [deck, ...prev];
-      const next = prev.slice();
-      next[i] = deck;
-      return next;
+    updateDecks((draft) => {
+      draft[deck.id] = deck;
     });
     setEditorOpen(false);
-  };
+  }
 
   function handleDeleteDeck(id: string) {
-    setDecks((prev) => prev.filter((d) => d.id !== id));
+    updateDecks((draft) => {
+      delete draft[id];
+    });
     setEditorOpen(false);
     setSelected(null);
-  };
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
