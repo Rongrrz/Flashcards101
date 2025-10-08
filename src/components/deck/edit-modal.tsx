@@ -97,31 +97,6 @@ export default function EditDeckModal({
         {/* Header */}
         <div className="mb-4 flex items-baseline justify-between">
           <h2 className="text-lg font-semibold">{title}</h2>
-          <div className="flex items-center gap-2">
-            {editing && (
-              <button
-                type="button"
-                onClick={() => onDelete(initialDeck!.id)}
-                className="rounded-md px-2.5 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
-              >
-                Delete
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100"
-            >
-              Close
-            </button>
-            <button
-              type="button"
-              onClick={handleSave}
-              className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Save
-            </button>
-          </div>
         </div>
 
         {/* Deck Name */}
@@ -182,7 +157,37 @@ export default function EditDeckModal({
           </div>
         </div>
 
-        {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
+        <div className="mt-1 border-t border-gray-300 pt-3 flex items-center justify-between">
+          {editing ? (
+            <button
+              type="button"
+              onClick={() => onDelete(initialDeck!.id)}
+              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
+            >
+              Delete
+            </button>
+          ) : (
+            <div />
+          )}
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              Close Without Saving
+            </button>
+            <button
+              type="button"
+              onClick={handleSave}
+              className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Save
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
