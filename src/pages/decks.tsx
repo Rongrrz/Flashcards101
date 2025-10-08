@@ -8,13 +8,9 @@ import { deckListOrdered, updateDecks } from '../stores/decks';
 
 export default function Decks() {
   const decks = useStore(deckListOrdered);
-
   const [selected, setSelected] = useState<Deck | null>(null);
-
   const [editorOpen, setEditorOpen] = useState(false);
   const [editing, setEditing] = useState<Deck>();
-
-  const openPreview = (d: Deck) => setSelected(d);
 
   function handleEditDeck(d: Deck) {
     setSelected(null);
@@ -61,7 +57,7 @@ export default function Decks() {
             key={deck.id}
             name={deck.name}
             cardCount={deck.cards.length}
-            onClick={() => openPreview(deck)}
+            onClick={() => setSelected(deck)}
           />
         ))}
       </div>
