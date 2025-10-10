@@ -8,9 +8,8 @@ I also wanted to challenge myself by having no backend in this project, so that 
 - Easily export & import flashcard sets.
 - A somewhat appealing website so you won't lose your mind.
 
-## Planned
-- Basic flashcard website functionality, of course.
-- Local storage (I am a big fan 😄).
+## TODOs
 - Import & export flashcards.
-- Dark/Light mode (a fun challenge to take on).
-- Support for Mobile devices
+- Deployment to GitHub pages.
+- Perhaps a fun logo for the site ;).
+- Dark mode!
