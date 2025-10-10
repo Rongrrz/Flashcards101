@@ -1,4 +1,4 @@
-import { computed } from 'nanostores';
+import { atom, computed } from 'nanostores';
 import { persistentAtom } from '@nanostores/persistent';
 import { produce } from 'immer';
 import type { DecksState } from '../types/types';
@@ -30,6 +30,10 @@ export const deckListOrdered = computed(decksAtom, (map) => {
   // Add sorting here if needed
   return list;
 });
+
+export const currentPracticingId = atom<string>(
+  deckListOrdered.get().length === 0 ? '' : deckListOrdered.get()[0].id
+);
 
 export function updateDecks(mutator: (draft: DecksState) => void) {
   decksAtom.set(produce(decksAtom.get(), mutator));
