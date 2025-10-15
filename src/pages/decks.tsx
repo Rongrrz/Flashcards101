@@ -6,6 +6,7 @@ import type { Deck } from '../types/types';
 import { useStore } from '@nanostores/react';
 import { deckListOrdered, updateDecks } from '../stores/decks';
 import { ExportDecksModal } from '../components/deck/export-modal';
+import { ImportDecksModal } from '../components/deck/import-modal';
 
 export function Decks() {
   const decks = useStore(deckListOrdered);
@@ -100,6 +101,11 @@ export function Decks() {
       <ExportDecksModal
         open={exportOpen}
         onClose={() => setExportOpen(false)}
+      />
+
+      <ImportDecksModal
+        open={importOpen}
+        onClose={() => setImportOpen(false)}
       />
     </div>
   );
