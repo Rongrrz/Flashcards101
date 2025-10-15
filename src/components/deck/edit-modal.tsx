@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { produce } from 'immer';
 import type { Card, Deck } from '../../types/types';
+import { generateId } from '../../utils/generateId';
 
 function createEmptyCard(): Card {
   return { front: '', back: '' };
@@ -76,7 +77,7 @@ export default function EditDeckModal({
     const err = validateDeck(name, cards);
     if (err) return setError(err);
     onSave({
-      id: initialDeck?.id ?? String(Date.now()),
+      id: initialDeck?.id ?? generateId(),
       name: name.trim(),
       cards: normalizeCards(cards),
     });
