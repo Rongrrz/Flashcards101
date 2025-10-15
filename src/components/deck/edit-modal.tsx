@@ -177,7 +177,7 @@ export default function EditDeckModal({
               onClick={handleSave}
               className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700"
             >
-              Save
+              Save Changes
             </button>
           </div>
         </div>
