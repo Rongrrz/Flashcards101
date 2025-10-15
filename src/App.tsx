@@ -1,9 +1,8 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Navbar } from "./components/navbar";
-import { Home } from "./pages/home";
-import Decks from "./pages/decks";
-import { Practice } from "./pages/practice";
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Navbar } from './components/navbar';
+import { Home } from './pages/home';
+import { Decks } from './pages/decks';
+import { Practice } from './pages/practice';
 
 export function App() {
   return (
@@ -27,6 +26,5 @@ export function App() {
         </footer>
       </div>
     </BrowserRouter>
-  )
+  );
 }
-
