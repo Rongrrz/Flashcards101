@@ -25,6 +25,8 @@ interface ExportDecksModalProps {
   onClose: () => void;
 }
 
+const defaultFileName = 'flashcards_export';
+
 export function ExportDecksModal({ open, onClose }: ExportDecksModalProps) {
   const decksRecord = useStore(decksAtom);
   const allDecks = useMemo(
@@ -33,7 +35,7 @@ export function ExportDecksModal({ open, onClose }: ExportDecksModalProps) {
   );
 
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [fileBase, setFileBase] = useState('flashcards_export');
+  const [fileBase, setFileBase] = useState(defaultFileName);
 
   const toggleOne = (id: string) => {
     setSelected((prev) => {
@@ -52,10 +54,13 @@ export function ExportDecksModal({ open, onClose }: ExportDecksModalProps) {
   const exportData = useMemo(() => decksToJSON(selectedDecks), [selectedDecks]);
   const filename = fileBase.trim()
     ? `${fileBase}.json`
-    : 'flashcards_export.json';
+    : `${defaultFileName}.json`;
 
   useEffect(() => {
-    if (open) setSelected(new Set());
+    if (open) {
+      setSelected(new Set());
+      setFileBase(defaultFileName);
+    }
   }, [open]);
 
   if (!open) return null;
