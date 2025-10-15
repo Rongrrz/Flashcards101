@@ -174,13 +174,6 @@ export default function EditDeckModal({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={onClose}
-              className="rounded-md px-2.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100"
-            >
-              Close Without Saving
-            </button>
-            <button
-              type="button"
               onClick={handleSave}
               className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700"
             >

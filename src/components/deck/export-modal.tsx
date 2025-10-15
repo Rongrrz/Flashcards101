@@ -132,13 +132,6 @@ export function ExportDecksModal({ open, onClose }: ExportDecksModalProps) {
             >
               Download .JSON File
             </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
-            >
-              Close
-            </button>
           </div>
         </div>
       </div>
