@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: 20
       - run: npm ci && npm run build
+      # DEBUG: prove we’re uploading the Vite build
+      - run: ls -la dist && sed -n '1,60p' dist/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
