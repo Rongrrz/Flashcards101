@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Home } from './pages/home';
 import { Decks } from './pages/decks';
@@ -6,7 +6,7 @@ import { Practice } from './pages/practice';
 
 export function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="min-h-screen flex flex-col bg-gray-100">
         {/* Header */}
         <Navbar />
@@ -25,6 +25,6 @@ export function App() {
           Random Footer
         </footer>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
