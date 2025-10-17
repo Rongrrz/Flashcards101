@@ -9,7 +9,6 @@ I also wanted to challenge myself by having no backend in this project, so that 
 - A somewhat appealing website so you won't lose your mind.
 
 ## TODOs
-- Import & export flashcards.
 - Deployment to GitHub pages.
 - Perhaps a fun logo for the site ;).
-- Dark mode!
+- Feel free to suggest TODOs!
