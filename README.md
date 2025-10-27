@@ -1,3 +1,5 @@
+[👉 Try it out here!](https://rongrrz.github.io/Flashcards101/)
+
 ## How It Began
 - In my Classics 101 class, my instructor suggested us to use Anki to study Greek/Latin bases, prefixes, and suffixes.
 - While there exist great flashcard/studying tools like Anki and Quizlet, I found them less approachable for quick or casual use.
